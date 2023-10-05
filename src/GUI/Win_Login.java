@@ -8,11 +8,10 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.w3c.dom.Text;
 
-public class Login_Window extends Stage {
+public class Win_Login extends Stage {
 
-    public Login_Window(){
+    public Win_Login(){
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(true);
@@ -25,7 +24,6 @@ public class Login_Window extends Stage {
     }
 
     private void initGUI(GridPane pane){
-
         pane.setPadding(new Insets(10));
         pane.setHgap(10);
         pane.setVgap(10);
@@ -65,10 +63,6 @@ public class Login_Window extends Stage {
             //Connection Success
             System.out.println("Login Success");
             this.close();
-        }
-        else{
-            //Connection Failed
-
         }
     }
 
