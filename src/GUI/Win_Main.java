@@ -53,8 +53,14 @@ public class Win_Main extends Application {
 //        rootPane.setBottom(btnConfirm);
 
         Button btnCreateExamAttempt = new Button("Opret Eksamensforsøg");
+        btnCreateExamAttempt.setOnAction(event -> btnCreateExamAttemptAction());
         vbxMain.getChildren().add(btnCreateExamAttempt);
 
         Button btnCreateExamSettlement = new Button("Opret Eksamensafvikling");
+        vbxMain.getChildren().add(btnCreateExamSettlement);
+    }
+
+    private void btnCreateExamAttemptAction(){
+        new Win_CreateExamAttempt().showAndWait();
     }
 }
