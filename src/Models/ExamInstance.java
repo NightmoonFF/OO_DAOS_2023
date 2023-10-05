@@ -4,61 +4,61 @@ import java.sql.Date;
 
 public class ExamInstance {
 
-    int examInstanceID;
-    String semester;
-    Date startDate;
-    Date endDate;
-    int fk_ExamID;
+    int afviklID;
+    String termin;
+    Date startDato;
+    Date slutDato;
+    int fk_eksID;
 
-    public ExamInstance(int examInstanceID, String semester, Date startDate, Date endDate, int fk_ExamID) {
-        this.examInstanceID = examInstanceID;
-        this.semester = semester;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.fk_ExamID = fk_ExamID;
+    public ExamInstance(int afviklID, String termin, Date startDato, Date slutDato, int fk_eksID) {
+        this.afviklID = afviklID;
+        this.termin = termin;
+        this.startDato = startDato;
+        this.slutDato = slutDato;
+        this.fk_eksID = fk_eksID;
     }
 
-    public int getExamInstanceID() {
-        return examInstanceID;
+    public int getAfviklID() {
+        return afviklID;
     }
 
-    public void setExamInstanceID(int examInstanceID) {
-        this.examInstanceID = examInstanceID;
+    public void setAfviklID(int afviklID) {
+        this.afviklID = afviklID;
     }
 
-    public String getSemester() {
-        return semester;
+    public String getTermin() {
+        return termin;
     }
 
-    public void setSemester(String semester) {
-        this.semester = semester;
+    public void setTermin(String termin) {
+        this.termin = termin;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getStartDato() {
+        return startDato;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartDato(Date startDato) {
+        this.startDato = startDato;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Date getSlutDato() {
+        return slutDato;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setSlutDato(Date slutDato) {
+        this.slutDato = slutDato;
     }
 
-    public int getFk_ExamID() {
-        return fk_ExamID;
+    public int getFk_eksID() {
+        return fk_eksID;
     }
 
-    public void setFk_ExamID(int fk_ExamID) {
-        this.fk_ExamID = fk_ExamID;
+    public void setFk_eksID(int fk_eksID) {
+        this.fk_eksID = fk_eksID;
     }
     @Override
     public String toString(){
-        return getSemester() +" - " + getStartDate();
+        return getTermin() +" - " + getStartDato();
     }
 }

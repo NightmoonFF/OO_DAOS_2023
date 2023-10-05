@@ -1,6 +1,5 @@
 package GUI;
 
-import Application.Connection;
 import Application.Insert;
 import Application.Select;
 import Application.Validation;
@@ -14,9 +13,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 
 public class Win_CreateExamAttempt extends Stage{
 
@@ -116,9 +112,9 @@ public class Win_CreateExamAttempt extends Stage{
                 cbxGrade.getValue(),
                 adm,
                 spnAttempt.getValue(),
-                cbxExam.getValue().getStartDate(),
-                cbxExam.getValue().getExamInstanceID(),
-                cbxStudent.getValue().getId()
+                cbxExam.getValue().getStartDato(),
+                cbxExam.getValue().getAfviklID(),
+                cbxStudent.getValue().getStudID()
         );
 
         //Execute

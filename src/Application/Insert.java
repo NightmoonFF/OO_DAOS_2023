@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 public abstract class Insert {
 
+    //TODO: Will not create Attempt if Grade is -3
     public static void createExamAttempt(ExamAttempt examAttempt){
         try {
 

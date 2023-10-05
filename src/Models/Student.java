@@ -1,52 +1,62 @@
 package Models;
 
+import Application.Select;
+
 public class Student {
 
-    int id;
-    String name;
-    boolean isActive;
-    int fk_EducationID;
+    int studID;
+    String navn;
+    boolean erAktiv;
+    int fk_uddID;
 
-    public Student(int id, String name, boolean isActive, int fk_EducationID) {
-        this.id = id;
-        this.name = name;
-        this.isActive = isActive;
-        this.fk_EducationID = fk_EducationID;
+    public Student(int studID, String navn, boolean erAktiv, int fk_uddID) {
+        this.studID = studID;
+        this.navn = navn;
+        this.erAktiv = erAktiv;
+        this.fk_uddID = fk_uddID;
     }
 
-    public int getId() {
-        return id;
+    public int getStudID() {
+        return studID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStudID(int studID) {
+        this.studID = studID;
     }
 
-    public String getName() {
-        return name;
+    public String getNavn() {
+        return navn;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNavn(String navn) {
+        this.navn = navn;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean isErAktiv() {
+        return erAktiv;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setErAktiv(boolean erAktiv) {
+        this.erAktiv = erAktiv;
     }
 
-    public int getFk_EducationID() {
-        return fk_EducationID;
+    public int getFk_uddID() {
+        return fk_uddID;
     }
 
-    public void setFk_EducationID(int fk_EducationID) {
-        this.fk_EducationID = fk_EducationID;
+    public void setFk_uddID(int fk_uddID) {
+        this.fk_uddID = fk_uddID;
     }
     @Override
     public String toString(){
-        return name;
+
+        if(erAktiv){
+            return "(Aktiv)" + "  " + navn + " - " + Select.getEducationByID(fk_uddID).getNavn();
+        }
+        else{
+            return "(Ophørt)" + "  " + navn + " - " + Select.getEducationByID(fk_uddID).getNavn();
+        }
+
+
     }
 }

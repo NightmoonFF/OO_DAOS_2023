@@ -1,5 +1,7 @@
 package Models;
 
+import Application.Select;
+
 import java.sql.Date;
 
 public class ExamAttempt {
@@ -76,5 +78,39 @@ public class ExamAttempt {
 
     public void setFk_studID(int fk_studID) {
         this.fk_studID = fk_studID;
+    }
+
+    @Override
+    public String toString(){
+
+        if(admBedøm == null){
+            return
+                "ID: " +
+                forsøgsID +
+                " - " +
+                "Karakter: " +
+                karakter + " - " +
+                "Forsøgsnummer: " +
+                forsøgsNr + " - " +
+                "Dato: " +
+                dato + " - " +
+                "Elev: " +
+                Select.getStudentByID(fk_studID).navn;
+        }
+        else{
+            return
+                "ID: " +
+                forsøgsID +
+                " - " +
+                "Karakter: " +
+                karakter + " - " +
+                "Forsøgsnummer: " +
+                forsøgsNr + " - " +
+                "Dato: " +
+                dato + " - " +
+                "Elev: " +
+                Select.getStudentByID(fk_studID).navn +
+                "(" + admBedøm + ")";
+        }
     }
 }

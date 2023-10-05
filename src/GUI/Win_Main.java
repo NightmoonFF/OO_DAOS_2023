@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.*;
+import Application.Select;
 
 public class Win_Main extends Application {
 
@@ -80,14 +80,26 @@ public class Win_Main extends Application {
         Button btnGetStudentsForExam = new Button("Hent Studerende for Eksamen/Termin");
         btnGetStudentsForExam.setOnAction(event -> btnGetStudentsForExamAction());
         vbxMain.getChildren().add(btnGetStudentsForExam);
+
+        // Styling
+        lblEx1.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
+        lblEx2.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
+        lblEx3.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
+
         //endregion
 
         //region HBOX for Select-Buttons
         Label lblSpacer = new Label();
         vbxMain.getChildren().add(lblSpacer);
 
+        Label lblSpacerSpam = new Label("-".repeat(150));
+        vbxMain.getChildren().add(lblSpacerSpam);
+        lblSpacerSpam.setStyle("-fx-padding: 0; -fx-background-color: transparent;");
+
+
         Label lblShow = new Label("Vis Alle:");
         vbxMain.getChildren().add(lblShow);
+        lblShow.setStyle("-fx-font-weight: bold;");
 
 
         HBox hbxSelects = new HBox(20);
@@ -140,14 +152,17 @@ public class Win_Main extends Application {
     private void btnSelectExamAttemptsAction(){
         lblNotifier.setText("Alle Eksamensforsøg i Databasen:");
         lvwDisplay.getItems().clear();
+        lvwDisplay.getItems().setAll(Select.getAllExamAttempts());
     }
     private void btnSelectExamInstancesAction(){
         lblNotifier.setText("Alle Eksamensafviklinger i Databasen:");
         lvwDisplay.getItems().clear();
+        lvwDisplay.getItems().setAll(Select.getAllExamInstances());
 
     }
     private void btnSelectStudentsAction(){
         lblNotifier.setText("Alle Studerende i Databasen:");
         lvwDisplay.getItems().clear();
+        lvwDisplay.getItems().setAll(Select.getAllStudents());
     }
 }
