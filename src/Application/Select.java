@@ -28,9 +28,7 @@ public abstract class Select {
         }
         catch (Exception e) {
             System.out.println("fejl:  "+e.getMessage());
-            Alert alertConnect = new Alert(Alert.AlertType.ERROR);
-            alertConnect.setContentText(e.getMessage());
-            alertConnect.showAndWait();
+            Utility.errorAlert(e.getMessage());
             return null;
         }
     }
@@ -56,9 +54,7 @@ public abstract class Select {
         }
         catch (Exception e) {
             System.out.println("fejl:  "+e.getMessage());
-            Alert alertConnect = new Alert(Alert.AlertType.ERROR);
-            alertConnect.setContentText(e.getMessage());
-            alertConnect.showAndWait();
+            Utility.errorAlert(e.getMessage());
             return null;
         }
 
@@ -77,12 +73,9 @@ public abstract class Select {
         }
         catch (Exception e) {
             System.out.println("fejl:  "+e.getMessage());
-            Alert alertConnect = new Alert(Alert.AlertType.ERROR);
-            alertConnect.setContentText(e.getMessage());
-            alertConnect.showAndWait();
+            Utility.errorAlert(e.getMessage());
             return null;
         }
     }
-
 
 }

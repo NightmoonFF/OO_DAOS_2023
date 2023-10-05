@@ -28,39 +28,33 @@ public abstract class Insert {
         catch (SQLException e) {
             switch (e.getErrorCode())
             { case 547 : {if (e.getMessage().contains("fk_afviklID")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Eksamensafvikling ikke fundet");
-                alert.showAndWait();
+                System.out.println("fejl:  "+e.getMessage());
+                Utility.errorAlert("Eksamensafvikling ikke fundet");
             }
             else if (e.getMessage().contains("fk_studID")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Studerende ikke fundet");
-                alert.showAndWait();
+                System.out.println("fejl:  "+e.getMessage());
+                Utility.errorAlert("Studerende ikke fundet");
             }
             else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Ukendt Foreign Key Fejl");
-                alert.showAndWait();
+                System.out.println("fejl:  "+e.getMessage());
+                Utility.errorAlert("Ukendt Foreign Key Fejl");
                 break;
             }
             }
                 case 2627: {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Eksamensforsøg allerede oprettet");
-                    alert.showAndWait();
+                    System.out.println("fejl:  "+e.getMessage());
+                    Utility.errorAlert("Eksamensforsøg allerede oprettet");
                     break;
                 }
                 default: {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText(e.getMessage());
-                    alert.showAndWait();
+                    System.out.println("fejl:  "+e.getMessage());
+                    Utility.errorAlert(e.getMessage());
                 }
             };
         }
         catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            System.out.println("fejl:  "+e.getMessage());
+            Utility.errorAlert(e.getMessage());
         }
     }
 

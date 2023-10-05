@@ -2,6 +2,11 @@ package Application;
 
 import java.util.ArrayList;
 
+/**
+ * The idea is that you call these with:  if (!someValidationType) { return; },
+ * before you execute something that may return an exception. Imo is a little cleaner,
+ * since you can hide away the bloat *shrugs*
+ */
 public class Validation {
 
     public static boolean intValidation(String s){
@@ -19,19 +24,11 @@ public class Validation {
             return false;
         }
     }
-
     public static <T>  boolean nullValidation(T input, String valueName){
         if (input == null) { Utility.errorAlert(valueName + " er ikke udfyldt"); return false;}
 
         else {
             System.out.println("Debug Log: " + input.toString() + " validated successfully as not null");;
         }   return true;
-    }
-    public static <T>  boolean nullValidation(ArrayList<T> input, String valueName){
-
-        for(int i = 0; i < input.size(); i++){
-            if(input.get(i) == null) { Utility.errorAlert(valueName + " er ikke udfyldt"); return false;}
-        }
-        return true;
     }
 }
