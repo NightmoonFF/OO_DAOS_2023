@@ -50,7 +50,7 @@ public class Win_CreateExamAttempt extends Stage{
         Label lblAdm = new Label("Administrativ Bedømmelse");
         cbxAdm = new ComboBox<String>();
         Label lblAttempt = new Label("Forsøgsnummer:");
-        spnAttempt =  new Spinner(1, 15, 1);
+        spnAttempt =  new Spinner<>(1, 15, 1);
         Label lblExam = new Label("Eksamen");
         cbxExam = new ComboBox<ExamInstance>();
         Label lblStudent = new Label("Student");
@@ -105,6 +105,7 @@ public class Win_CreateExamAttempt extends Stage{
         }
 
         //Null Validation
+        if (!Validation.nullValidation(Select.getNewExamAttemptID(), "Intern ID Oprettelse")) { return; }
         if (!Validation.nullValidation(cbxGrade.getValue(), "Karakter")) { return; }
         if (!Validation.nullValidation(spnAttempt.getValue(), "Forsøgsnummer")) { return; }
         if (!Validation.nullValidation(cbxExam.getValue(), "Eksamen")) { return; }
