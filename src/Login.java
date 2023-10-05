@@ -1,11 +1,9 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class login {
-            public static void main(String[] args) {
+public class Login {
+            public static void connect() {
                 // Database-forbindelsesoplysninger
                 String url = "jdbc:mysql://localhost:3306/din_database_navn";
                 String brugernavn = "din_bruger";
