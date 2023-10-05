@@ -30,9 +30,7 @@ public class Connection {
             return true;
         }
         catch (Exception e){
-            Alert alertConnect = new Alert(Alert.AlertType.ERROR);
-            alertConnect.setContentText(e.getMessage());
-            alertConnect.showAndWait();
+            Utility.errorAlert(e.getMessage());
             return false;
         }
 

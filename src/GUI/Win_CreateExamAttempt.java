@@ -3,6 +3,7 @@ package GUI;
 import Application.Connection;
 import Application.Insert;
 import Application.Select;
+import Application.Validation;
 import Models.ExamAttempt;
 import Models.ExamInstance;
 import Models.Student;
@@ -14,6 +15,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class Win_CreateExamAttempt extends Stage{
 
@@ -29,8 +32,11 @@ public class Win_CreateExamAttempt extends Stage{
         this.setScene(scene);
     }
 
-    ComboBox cbxGrade, cbxAdm, cbxExam, cbxStudent;
-    Spinner spnAttempt;
+    ComboBox<String> cbxAdm;
+    ComboBox<ExamInstance> cbxExam;
+    ComboBox<Student> cbxStudent;
+    ComboBox<Integer> cbxGrade;
+    Spinner<Integer> spnAttempt;
 
     private void initGUI(GridPane pane){
 
@@ -44,7 +50,7 @@ public class Win_CreateExamAttempt extends Stage{
         Label lblAdm = new Label("Administrativ Bedømmelse");
         cbxAdm = new ComboBox<String>();
         Label lblAttempt = new Label("Forsøgsnummer:");
-        Spinner<Integer> spnAttempt = new Spinner<>(1, 15, 1);
+        spnAttempt =  new Spinner(1, 15, 1);
         Label lblExam = new Label("Eksamen");
         cbxExam = new ComboBox<ExamInstance>();
         Label lblStudent = new Label("Student");
@@ -65,16 +71,15 @@ public class Win_CreateExamAttempt extends Stage{
         pane.add(lblSpacer, 0 ,10);
         pane.add(btnConfirm, 0, 11);
 
-        //Null, SY, IM, IA
         cbxAdm.getItems().addAll("Ingen Bemærkning", "Sygdom", "Ikke Fremmødt", "Ikke Afleveret");
         cbxGrade.getItems().addAll(-3, 00, 02, 4, 7, 10, 12);
         cbxExam.getItems().addAll(Select.getAllExamInstances());
         cbxStudent.getItems().addAll(Select.getAllStudents());
 
         cbxAdm.setValue("Ingen Bemærkning");
-        cbxExam.setPromptText("(Vælg Eksamen)");
-        cbxGrade.setPromptText("(Vælg Karakter)");
-        cbxStudent.setPromptText("(Vælg Studerende)");
+        cbxExam.setPromptText("---");
+        cbxGrade.setPromptText("---");
+        cbxStudent.setPromptText("---");
 
         btnConfirm.setOnAction(event -> btnConfirmAction());
 
@@ -82,8 +87,7 @@ public class Win_CreateExamAttempt extends Stage{
 
     private void btnConfirmAction(){
 
-        String adm = null;
-
+        String adm;
         switch (String.valueOf(cbxAdm.getValue())) {
             case "Sygdom":
                 adm = "SY";
@@ -100,22 +104,23 @@ public class Win_CreateExamAttempt extends Stage{
                 break;
         }
 
-        // Apparently you can't just return objects from JavaFX controls. Hurray
-        Integer grade = (Integer) cbxGrade.getValue();
-        ExamInstance examInstance = (ExamInstance) cbxExam.getValue();
-        Student student = (Student) cbxStudent.getValue();
-        Integer attempt = (Integer) spnAttempt.getValue();
+        //Null Validation
+        if (!Validation.nullValidation(cbxGrade.getValue(), "Karakter")) { return; }
+        if (!Validation.nullValidation(spnAttempt.getValue(), "Forsøgsnummer")) { return; }
+        if (!Validation.nullValidation(cbxExam.getValue(), "Eksamen")) { return; }
+        if (!Validation.nullValidation(cbxStudent.getValue(), "Studerende")) { return; }
 
         ExamAttempt examAttempt = new ExamAttempt(
                 Select.getNewExamAttemptID(),
-                grade,
+                cbxGrade.getValue(),
                 adm,
-                attempt,
-                examInstance.getStartDate(),
-                examInstance.getExamInstanceID(),
-                student.getId()
+                spnAttempt.getValue(),
+                cbxExam.getValue().getStartDate(),
+                cbxExam.getValue().getExamInstanceID(),
+                cbxStudent.getValue().getId()
         );
 
+        //Execute
         Insert.createExamAttempt(examAttempt);
     }
 

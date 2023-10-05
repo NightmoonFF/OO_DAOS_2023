@@ -59,6 +59,6 @@ public class ExamInstance {
     }
     @Override
     public String toString(){
-        return getSemester() + getStartDate();
+        return getSemester() +" - " + getStartDate();
     }
 }
