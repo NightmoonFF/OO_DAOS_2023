@@ -2,6 +2,7 @@ package GUI;
 
 import Application.Insert;
 import Application.Select;
+import Application.Utility;
 import Application.Validation;
 import Models.ExamAttempt;
 import Models.ExamInstance;
@@ -100,7 +101,6 @@ public class Win_CreateExamAttempt extends Stage{
                 break;
         }
 
-        //Null Validation
         if (!Validation.nullValidation(Select.getNewExamAttemptID(), "Intern ID Oprettelse")) { return; }
         if (!Validation.nullValidation(cbxGrade.getValue(), "Karakter")) { return; }
         if (!Validation.nullValidation(spnAttempt.getValue(), "Forsøgsnummer")) { return; }
@@ -117,8 +117,11 @@ public class Win_CreateExamAttempt extends Stage{
                 cbxStudent.getValue().getStudID()
         );
 
-        //Execute
-        Insert.createExamAttempt(examAttempt);
+        if (Insert.createExamAttempt(examAttempt)){
+            Utility.successAlert("Eksamensforsøg Oprettet i Databasen!");
+            this.close();
+        }
+
     }
 
 }

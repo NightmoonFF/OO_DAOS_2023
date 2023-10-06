@@ -53,6 +53,6 @@ public class Exam {
 
     @Override
     public String toString(){
-        return navn + " - " + form + " - " + Select.getEducationByID(fk_uddID);
+        return navn + " - " + form + " - " + Select.getEducationByID(fk_uddID).getNavn();
     }
 }

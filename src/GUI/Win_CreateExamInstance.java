@@ -1,8 +1,11 @@
 package GUI;
 
+import Application.Insert;
 import Application.Select;
+import Application.Utility;
 import Application.Validation;
 import Models.Exam;
+import Models.ExamInstance;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -10,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import java.sql.Date;
 
 public class Win_CreateExamInstance extends Stage {
 
@@ -59,14 +63,32 @@ public class Win_CreateExamInstance extends Stage {
         cbxExam.getItems().addAll(Select.getAllExams());
         cbxExam.setPromptText("---");
         txfSemester.setPromptText("---");
+
         btnConfirm.setOnAction(event -> btnConfirmAction());
     }
 
     private void btnConfirmAction(){
 
+        if (!Validation.nullValidation(Select.getNewExamInstanceID(), "Intern ID Oprettelse")) { return; }
+        if (!Validation.nullValidation(cbxExam.getValue(), "Eksamen")) { return; }
+        if (!Validation.nullValidation(txfSemester.getText(), "Termin")) { return; }
+        if (!Validation.nullValidation(dpStart.getValue(), "Start Dato")) { return; }
+        if (!Validation.nullValidation(dpEnd.getValue(), "Slut Dato")) { return; }
+        if(txfSemester.getText() == "") { Utility.errorAlert("Semester er ikke udfyldt"); return;}
 
-        if (!Validation.nullValidation())
+        ExamInstance examInstance = new ExamInstance(
+                Select.getNewExamInstanceID(),
+                txfSemester.getText(),
+                Date.valueOf(dpStart.getValue()),
+                Date.valueOf(dpEnd.getValue()),
+                cbxExam.getValue().getEksID()
+        );
 
+       if(Insert.createExamInstance(examInstance)){
+           Utility.successAlert("Eksamensavfklaring Oprettet i Databasen!");
+           this.close();
+
+       }
 
     }
 

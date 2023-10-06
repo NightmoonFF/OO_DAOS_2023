@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import Application.Select;
+import Application.Utility;
 
 public class Win_Main extends Application {
 
@@ -77,15 +78,9 @@ public class Win_Main extends Application {
         Label lblEx3 = new Label("Opgave 8.c");
         vbxMain.getChildren().add(lblEx3);
 
-        Button btnGetStudentsForExam = new Button("Hent Studerende for Eksamen/Termin");
+        Button btnGetStudentsForExam = new Button("Hent Studerende for Eksamen");
         btnGetStudentsForExam.setOnAction(event -> btnGetStudentsForExamAction());
         vbxMain.getChildren().add(btnGetStudentsForExam);
-
-        // Styling
-        lblEx1.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
-        lblEx2.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
-        lblEx3.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
-
         //endregion
 
         //region HBOX for Select-Buttons
@@ -130,7 +125,39 @@ public class Win_Main extends Application {
         lvwDisplay.setEditable(false);
         lvwDisplay.setFocusTraversable(false);
 
+        //region Styling
+        lblEx1.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
+        lblEx2.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
+        lblEx3.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
 
+        rootPane.setStyle("-fx-background-color: #ADD8E6;");
+
+        btnCreateExamAttempt.setStyle("-fx-background-color: #6fa5db; " +
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-padding: 10 20;");
+        btnCreateExamInstance.setStyle("-fx-background-color: #6fa5db; " +
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-padding: 10 20;");
+        btnGetStudentsForExam.setStyle("-fx-background-color: #6fa5db; " +
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-padding: 10 20;");
+        btnSelectExamAttempts.setStyle("-fx-background-color: #6fa5db; " +
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-padding: 10 20;");
+        btnSelectExamInstances.setStyle("-fx-background-color: #6fa5db; " +
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-padding: 10 20;");
+        btnSelectStudents.setStyle("-fx-background-color: #6fa5db; " +
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-padding: 10 20;");
+        lvwDisplay.setStyle("-fx-background-color: #B2E0FF;");
+        //endregion
     }
 
     private void btnCreateExamAttemptAction(){
@@ -139,12 +166,12 @@ public class Win_Main extends Application {
     }
 
     private void btnCreateExamInstanceAction(){
-
+        new Win_CreateExamInstance().showAndWait();
         lvwDisplay.getItems().clear();
     }
 
     private void btnGetStudentsForExamAction(){
-
+        Utility.successAlert("Eksamensavfklaring Oprettet i Databasen!");
         lvwDisplay.getItems().clear();
     }
 
