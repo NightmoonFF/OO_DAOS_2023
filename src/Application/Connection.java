@@ -16,11 +16,6 @@ public class Connection {
 
         String server="localhost";
 
-        //TODO: remove temporary auto-login
-        dbName = "Semester2_Aflevering1";
-        user = "sa";
-        password = "19451945Wtf";
-
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             minConnection = DriverManager.getConnection("jdbc:sqlserver://" + server + ";databaseName=" + dbName +
