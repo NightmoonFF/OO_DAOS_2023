@@ -12,7 +12,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import Application.Select;
 import Application.Utility;
 
@@ -39,6 +38,7 @@ public class Win_Main extends Application {
     private void initStage(Stage stage){
 
         rootPane = new BorderPane();
+        rootPane.setStyle("-fx-background-color: #ADD8E6;");
         Scene scene = new Scene(rootPane, 700, 700);
         stage.setTitle("OO_DAOS_2023");
         stage.setScene(scene);
@@ -49,16 +49,10 @@ public class Win_Main extends Application {
 
         VBox vbxMain = new VBox(10);
         vbxMain.setAlignment(Pos.TOP_CENTER);
-        //vbxMain.getChildren().addAll(lblPkName, txfPackageName, hbxNavigation, lblSpacer, txaDescription);
 
         BorderPane.setAlignment(vbxMain, Pos.TOP_CENTER);
         BorderPane.setMargin(vbxMain, new Insets(12, 12, 12, 12));
         rootPane.setCenter(vbxMain);
-
-        // Border bottom
-//        BorderPane.setAlignment(btnConfirm, Pos.BASELINE_CENTER);
-//        BorderPane.setMargin(btnConfirm, new Insets(12, 12, 12, 12));
-//        rootPane.setBottom(btnConfirm);
 
         //region Opgave-Buttons
         Label lblEx1 = new Label("Opgave 8.a");
@@ -91,11 +85,9 @@ public class Win_Main extends Application {
         vbxMain.getChildren().add(lblSpacerSpam);
         lblSpacerSpam.setStyle("-fx-padding: 0; -fx-background-color: transparent;");
 
-
         Label lblShow = new Label("Vis Alle:");
         vbxMain.getChildren().add(lblShow);
         lblShow.setStyle("-fx-font-weight: bold;");
-
 
         HBox hbxSelects = new HBox(20);
         vbxMain.getChildren().add(hbxSelects);
@@ -114,6 +106,7 @@ public class Win_Main extends Application {
         hbxSelects.getChildren().add(btnSelectStudents);
         //endregion
 
+        //region ListView
         Label lblSpacer2 = new Label();
         vbxMain.getChildren().add(lblSpacer2);
 
@@ -124,13 +117,12 @@ public class Win_Main extends Application {
         vbxMain.getChildren().add(lvwDisplay);
         lvwDisplay.setEditable(false);
         lvwDisplay.setFocusTraversable(false);
+        //endregion
 
         //region Styling
         lblEx1.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
         lblEx2.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
         lblEx3.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
-
-        rootPane.setStyle("-fx-background-color: #ADD8E6;");
 
         btnCreateExamAttempt.setStyle("-fx-background-color: #6fa5db; " +
                 "-fx-text-fill: white; " +
@@ -171,7 +163,9 @@ public class Win_Main extends Application {
     }
 
     private void btnGetStudentsForExamAction(){
-        Utility.successAlert("Eksamensavfklaring Oprettet i Databasen!");
+        new Win_GetStudentsForExam().showAndWait();
+        //TODO: get data queried from parameters given above, and insert into lvwDisplay
+        //TODO: Bonux - make the notifier label say "Viser beståede fra eksamen x i termin y" (with variables)
         lvwDisplay.getItems().clear();
     }
 

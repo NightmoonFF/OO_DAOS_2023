@@ -3,7 +3,7 @@ package Models;
 import Application.Select;
 
 public class Exam {
-
+    //TODO: Termin moved here?
     int eksID;
     String navn;
     boolean erStopPrøve;

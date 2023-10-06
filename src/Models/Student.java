@@ -3,7 +3,6 @@ package Models;
 import Application.Select;
 
 public class Student {
-
     int studID;
     String navn;
     boolean erAktiv;
@@ -51,10 +50,10 @@ public class Student {
     public String toString(){
 
         if(erAktiv){
-            return "(Aktiv)" + "  " + navn + " - " + Select.getEducationByID(fk_uddID).getNavn();
+            return navn + " - " + Select.getEducationByID(fk_uddID).getNavn() + " (Aktiv)";
         }
         else{
-            return "(Ophørt)" + "  " + navn + " - " + Select.getEducationByID(fk_uddID).getNavn();
+            return navn + " - " + Select.getEducationByID(fk_uddID).getNavn() + " (Ophørt)";
         }
 
 
