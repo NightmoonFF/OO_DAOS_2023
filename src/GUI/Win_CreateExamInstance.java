@@ -21,7 +21,7 @@ public class Win_CreateExamInstance extends Stage {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(true);
-        this.setTitle("Opret Eksamensforsøg");
+        this.setTitle("Opret Eksamensafvikling");
         this.requestFocus();
         GridPane pane = new GridPane();
         this.initGUI(pane);

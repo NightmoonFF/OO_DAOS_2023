@@ -19,7 +19,7 @@ public class Win_GetStudentsForExam extends Stage {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(true);
-        this.setTitle("Opret Eksamensforsøg");
+        this.setTitle("Find Beståede Studerende");
         this.requestFocus();
         GridPane pane = new GridPane();
         this.initGUI(pane);
@@ -36,15 +36,32 @@ public class Win_GetStudentsForExam extends Stage {
         pane.setVgap(10);
         pane.setGridLinesVisible(false);
 
-        lblExam = new Label();
+        lblExam = new Label("Eksamen:");
         cbxExam = new ComboBox<>();
-        lblSemester = new Label();
+        lblSemester = new Label("Termin:");
         cbxTermin = new ComboBox<>();
-
-        cbxExam.getItems().setAll(Select.getAllExams());
 
         Button btnConfirm = new Button("Godkend");
         btnConfirm.setOnAction(event -> btnConfirmAction());
+
+        pane.add(lblExam, 0, 0);
+        pane.add(cbxExam, 0, 1);
+        pane.add(lblSemester, 2, 0);
+        pane.add(cbxTermin, 2, 1);
+        pane.add(btnConfirm, 1, 3);
+
+        cbxExam.setMinWidth(150);
+        cbxExam.setPrefWidth(150);
+
+        cbxExam.setMaxWidth(150);
+        cbxTermin.setMinWidth(150);
+        cbxTermin.setPrefWidth(150);
+        cbxTermin.setMaxWidth(150);
+
+
+        cbxExam.getItems().setAll(Select.getAllExams());
+        cbxExam.setPromptText("---");
+        cbxTermin.setPromptText("---");
 
 
     }
