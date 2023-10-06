@@ -14,11 +14,9 @@ public class Connection {
     public static boolean isConnected = false;
     public static boolean connect(String dbName, String user, String password) {
 
-        String server="localhost";
-
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            minConnection = DriverManager.getConnection("jdbc:sqlserver://" + server + ";databaseName=" + dbName +
+            minConnection = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=" + dbName +
                     ";user=" + user + ";password=" + password + ";");
             stmt = minConnection.createStatement();
             isConnected = true;

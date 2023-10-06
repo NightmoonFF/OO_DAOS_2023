@@ -29,7 +29,7 @@ public class Win_Login extends Stage {
         pane.setVgap(10);
         pane.setGridLinesVisible(false);
 
-        Label lblDbName = new Label("Database Name:");
+        Label lblDbName = new Label("Database URL:");
         Label lblUsername = new Label("Username:");
         Label lblPassword = new Label("Password:");
         TextField txfDbName = new TextField();
@@ -46,13 +46,13 @@ public class Win_Login extends Stage {
         pane.add(psfPassword, 0, 5);
         pane.add(btnConnect, 0, 6);
 
-        txfDbName.setText("Semester2_Aflevering1");
+        txfDbName.setText("jdbc:sqlserver://localhost;databaseName=Semester2_Aflevering1");
         txfUsername.setText("sa");
 
-        this.setWidth(380);
-        txfDbName.setMinWidth(350);
-        txfUsername.setMinWidth(350);
-        psfPassword.setMinWidth(350);
+        this.setWidth(450);
+        txfDbName.setMinWidth(430);
+        txfUsername.setMinWidth(430);
+        psfPassword.setMinWidth(430);
         psfPassword.setPromptText("Your Password");
 
         btnConnect.setOnAction(event -> btnConnectAction(txfDbName.getText(), txfUsername.getText(), psfPassword.getText()));
