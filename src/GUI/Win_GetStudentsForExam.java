@@ -1,7 +1,10 @@
 package GUI;
 
 import Application.Select;
+import Application.Validation;
 import Models.Exam;
+import Models.ExamInstance;
+import Models.StudentBySubjectAndSemester;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,17 +15,19 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.util.ArrayList;
+
 
 public class Win_GetStudentsForExam extends Stage {
 
-    public Win_GetStudentsForExam(){
+    public Win_GetStudentsForExam(Win_Main main){
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(true);
         this.setTitle("Find Beståede Studerende");
         this.requestFocus();
         GridPane pane = new GridPane();
-        this.initGUI(pane);
+        this.initGUI(pane, main);
         Scene scene = new Scene(pane);
         this.setScene(scene);
     }
@@ -30,7 +35,7 @@ public class Win_GetStudentsForExam extends Stage {
     Label lblExam, lblSemester;
     ComboBox<Exam> cbxExam;
     ComboBox<String> cbxTermin;
-    private void initGUI(GridPane pane){
+    private void initGUI(GridPane pane, Win_Main main){
         pane.setPadding(new Insets(10));
         pane.setHgap(10);
         pane.setVgap(10);
@@ -42,7 +47,7 @@ public class Win_GetStudentsForExam extends Stage {
         cbxTermin = new ComboBox<>();
 
         Button btnConfirm = new Button("Godkend");
-        btnConfirm.setOnAction(event -> btnConfirmAction());
+        btnConfirm.setOnAction(event -> btnConfirmAction(main));
 
         pane.add(lblExam, 0, 0);
         pane.add(cbxExam, 0, 1);
@@ -63,21 +68,22 @@ public class Win_GetStudentsForExam extends Stage {
         cbxExam.setPromptText("---");
         cbxTermin.setPromptText("---");
 
+        ArrayList<String> terminer = new ArrayList<>();
+        for (ExamInstance e : new ArrayList<>(Select.getAllExamInstances())){
+            terminer.add(e.getTermin());
+        }
+        cbxTermin.getItems().setAll(terminer);
 
     }
 
 
-    private void btnConfirmAction(){
+    private void btnConfirmAction(Win_Main main){
 
-        //TODO: Make query for finding:
-        //But like, this requires Termin to be on Eksamen, right?
+        if (!Validation.nullValidation(cbxExam, "Examen")) { return; }
+        if (!Validation.nullValidation(cbxTermin, "Termin")) {return; }
 
-//        c.	Lav et java-program, der anvender JDBC.
-//        Via programmet skal du indtaste navnet på en given eksamen og en given termin.
-//        Programmet skal som resultat vise en liste af de studerende,
-//        der har deltaget i denne afvikling af denne eksamen i denne termin.
-//        Udover den studerendes navn og id, skal karakteren også være med i resultatet.
-
+        main.lvwDisplay.getItems().setAll(Select.GetAllStudentsByExamAndSemester(cbxExam.getValue(), cbxTermin.getValue()));
+        this.close();
     }
 
 

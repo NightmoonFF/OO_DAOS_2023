@@ -12,11 +12,8 @@ public abstract class Insert {
     //TODO: Will not create Attempt if Grade is -3
     public static boolean createExamAttempt(ExamAttempt examAttempt){
         try {
-
             String sql = "insert into eksamensForsøg values (?,?,?,?,?,?,?)";
-
             PreparedStatement ps = Connection.minConnection.prepareStatement(sql);
-
             ps.clearParameters();
             ps.setInt(1, examAttempt.getForsøgsID());
             ps.setInt(2, examAttempt.getKarakter());

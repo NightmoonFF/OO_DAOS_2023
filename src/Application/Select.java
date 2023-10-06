@@ -1,8 +1,6 @@
 package Application;
 
 import Models.*;
-import javafx.scene.control.Alert;
-
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -75,6 +73,37 @@ public abstract class Select {
         }
     }
 
+    public static ArrayList<StudentBySubjectAndSemester> GetAllStudentsByExamAndSemester(Exam exam, String examInstance){
+        ArrayList<StudentBySubjectAndSemester> students = new ArrayList();
+        try {
+
+            String sql = "SELECT studerende.studID,  studerende.navn, eksamensForsøg.karakter\n" +
+                    "FROM eksamensAfvikling\n" +
+                    "JOIN eksamensForsøg ON eksamensForsøg.fk_afviklID = eksamensAfvikling.afviklID \n" +
+                    "JOIN studerende ON studerende.studID = eksamensForsøg.fk_studID\n" +
+                    "JOIN eksamen on eksamen.eksID = eksamensAfvikling.fk_eksID\n" +
+                    "WHERE eksamen.eksID = "+ exam.getEksID() +" AND eksamensAfvikling.termin LIKE '"+ examInstance +"';";
+
+            ResultSet res = Connection.stmt.executeQuery(sql);
+
+            while (res.next()) {
+                students.add(new StudentBySubjectAndSemester(
+                        res.getInt(1),
+                        res.getString(2),
+                        res.getInt(3)));
+            }
+
+            if(students.size() < 1) { Utility.errorAlert("Ingen Resultater Fundet!"); }
+            return students;
+        }
+        catch (Exception e) {
+            System.out.println("fejl:  "+e.getMessage());
+            Utility.errorAlert(e.getMessage());
+            return null;
+        }
+
+    }
+
     // Exam
     public static ArrayList<Exam> getAllExams(){
         ArrayList<Exam> exams = new ArrayList();
@@ -103,10 +132,8 @@ public abstract class Select {
 
         ArrayList<ExamInstance> instances = new ArrayList();
         try {
-
             String sql = "select * from eksamensAfvikling";
             ResultSet res = Connection.stmt.executeQuery(sql);
-
             while (res.next()) {
 
                 instances.add(new ExamInstance(

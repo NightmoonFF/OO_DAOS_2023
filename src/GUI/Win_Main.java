@@ -163,12 +163,10 @@ public class Win_Main extends Application {
     }
 
     private void btnGetStudentsForExamAction(){
-        new Win_GetStudentsForExam().showAndWait();
-        //TODO: get data queried from parameters given above, and insert into lvwDisplay
-        //TODO: Bonux - make the notifier label say "Viser beståede fra eksamen x i termin y" (with variables)
         lvwDisplay.getItems().clear();
-    }
+        new Win_GetStudentsForExam(this).showAndWait();
 
+    }
 
     private void btnSelectExamAttemptsAction(){
         lblNotifier.setText("Alle Eksamensforsøg i Databasen:");
